@@ -1,0 +1,11 @@
+.table-prod {
+    width: 900px;
+    text-align: center;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.table-prod tr, .table-prod td, .table-prod th {
+    border: 1px solid black;
+    padding: 16px;
+}
