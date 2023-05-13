@@ -28,6 +28,12 @@ function Form() {
             User_Role: 'User',
         };
 
+        const data3 = {
+            Staff_Username: username,
+            Staff_Password: password,
+            Staff_Role: 'Staff',
+        };
+
         const url2 = 'https://localhost:44397/api/ad_login';
         fetch(url2, {
             method: 'POST',
@@ -73,6 +79,32 @@ function Form() {
                     localStorage.setItem('loggedIn', true);
                     alert('User Successful!!');
                     usenavigate('/user');
+                    // console.log(result);
+                }
+                // else {
+                //     alert('Please enter valid credentials!!');
+                //     console.log(result);
+                // }
+            })
+            .catch((error) => {
+                console.log(error);
+                alert(error);
+            });
+        const url4 = 'https://localhost:44397/api/staff_login';
+        fetch(url4, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data3),
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                if (result === 'Staff Valid') {
+                    localStorage.setItem('staff', JSON.stringify(data3));
+                    localStorage.setItem('loggedIn', true);
+                    alert('Staff Successful!!');
+                    usenavigate('/staff');
                     // console.log(result);
                 }
                 // else {

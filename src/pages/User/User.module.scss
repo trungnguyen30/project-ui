@@ -43,69 +43,6 @@
     justify-content: space-between;
 }
 
-// Product
-.product {
-    margin-bottom: 10px;
-}
-
-.product-item {
-    background-color: var(--white-color);
-    margin-top: 10px;
-    border-radius: 2px;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
-    transition: transform ease-in 0.1s;
-    will-change: transform;
-    width: 100%;
-
-    &:hover {
-        box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.05);
-        transform: translateY(-1px);
-    }
-}
-
-.product-img {
-    width: 100%;
-}
-
-.img {
-    width: 100%;
-}
-
-.product-title {
-    font-size: 1.4rem;
-    font-weight: 450;
-    color: var(--text-color);
-    margin: 10px;
-    /* Tạo giới hạn dòng và dấu ... */
-    line-height: 1.8rem;
-    height: 3.6rem;
-    overflow: hidden;
-    display: block;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-}
-
-.product-price {
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    padding-bottom: 8px;
-}
-
-.old-price {
-    font-size: 1.4rem;
-    color: #666;
-    text-decoration: line-through;
-    margin-left: 10px;
-}
-
-.new-price {
-    font-size: 1.6rem;
-    color: var(--primary-color);
-    margin-left: 10px;
-}
-
 // Pagination
 .pagination {
     margin: 48px 0 32px 0;

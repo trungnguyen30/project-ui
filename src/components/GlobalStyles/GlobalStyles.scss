@@ -60,6 +60,24 @@ input {
     margin-right: -5px;
 }
 
+//Max
+.max {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.max-full-width {
+    width: 100%;
+}
+
+.max-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+
 /* Test */
 .grid-column-2 {
     padding-left: 5px;
@@ -101,3 +119,37 @@ input {
 .main-container {
     padding: 36px 0;
 }
+
+//Ads
+/* LEFT SIDE */
+.FloatAdx-left {
+    right: 50%; /* Change this to switch left or right */
+    margin-right: 700px; /* Adjust this value with your Blog width */
+    top: 156px;
+    position: fixed;
+    height: 605px;
+    width: 160px;
+}
+
+@media only screen and (max-width: 1350px) {
+    #FloatAdx-left {
+        display: none;
+    }
+}
+
+/* LEFT SIDE */
+.FloatAdx-right {
+    left: 50%; /* Change this to switch left or right */
+    margin-left: 630px; /* Adjust this value with your Blog width */
+    top: 156px;
+    position: fixed;
+    height: 605px;
+    width: 160px;
+}
+
+@media only screen and (max-width: 1350px) {
+    #FloatAdx-right {
+        display: none;
+    }
+}
+

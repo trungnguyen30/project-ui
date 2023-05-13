@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './Category.module.scss';
 import classNames from 'classnames/bind';
 import CateCreateForm from './Method/Create/CateCreateForm';
@@ -11,6 +11,7 @@ function Ad_Category() {
     const [cates, setCates] = useState([]);
     const [showingCreateCateForm, setShowingCreateCateForm] = useState(false);
     const [cateCurrently, setCateCurrently] = useState(null);
+    const [search, setSearch] = useState('');
 
     function getCates() {
         const url = 'https://localhost:44397/api/Category';
@@ -27,6 +28,22 @@ function Ad_Category() {
                 alert(error);
             });
     }
+
+    useEffect(() => {
+        const url = 'https://localhost:44397/api/Category';
+        fetch(url, {
+            method: 'GET',
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log(result);
+                setCates(result);
+            })
+            .catch((error) => {
+                console.log(error);
+                alert(error);
+            });
+    }, []);
 
     function deleteCate(Categoryid) {
         const url = `${'https://localhost:44397/api/Category'}/${Categoryid}`;
@@ -46,44 +63,55 @@ function Ad_Category() {
 
     function renderCateTable() {
         return (
-            <table className={cx('table-cate')}>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Metatitle</th>
-                        <th>CRUD Operations</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {cates.map((cate) => (
-                        <tr key={cate.Categoryid}>
-                            <td>{cate.Categoryid}</td>
-                            <td>{cate.CategoryName}</td>
-                            <td>{cate.MetaTitle}</td>
-                            <td>
-                                <Button sizeA primary onClick={() => setCateCurrently(cate)}>
-                                    Update
-                                </Button>
-                                <Button
-                                    sizeA
-                                    primary
-                                    onClick={() => {
-                                        if (
-                                            window.confirm(
-                                                `Are you sure that want to delete the category name "${cate.CategoryName}" ?`,
-                                            )
-                                        )
-                                            deleteCate(cate.Categoryid);
-                                    }}
-                                >
-                                    Delete
-                                </Button>
-                            </td>
+            <>
+                <div className={cx('search')}>
+                    <input placeholder="Nhập sản phẩm cần tìm kiếm..." onChange={(e) => setSearch(e.target.value)} />
+                </div>
+                <table className={cx('table-cate')}>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Metatitle</th>
+                            <th>CRUD Operations</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {cates
+                            .filter((item) => {
+                                return search.toLowerCase() === ''
+                                    ? item
+                                    : item.CategoryName.toLowerCase().includes(search);
+                            })
+                            .map((cate) => (
+                                <tr key={cate.Categoryid}>
+                                    <td>{cate.Categoryid}</td>
+                                    <td>{cate.CategoryName}</td>
+                                    <td>{cate.MetaTitle}</td>
+                                    <td>
+                                        <Button sizeA primary onClick={() => setCateCurrently(cate)}>
+                                            Update
+                                        </Button>
+                                        <Button
+                                            sizeA
+                                            primary
+                                            onClick={() => {
+                                                if (
+                                                    window.confirm(
+                                                        `Are you sure that want to delete the category name "${cate.CategoryName}" ?`,
+                                                    )
+                                                )
+                                                    deleteCate(cate.Categoryid);
+                                            }}
+                                        >
+                                            Delete
+                                        </Button>
+                                    </td>
+                                </tr>
+                            ))}
+                    </tbody>
+                </table>
+            </>
         );
     }
 
@@ -145,9 +173,9 @@ function Ad_Category() {
         <div className="grid">
             {showingCreateCateForm === false && cateCurrently === null && (
                 <div style={{ marginBottom: '20px' }}>
-                    <Button sizeA primary onClick={getCates}>
+                    {/* <Button sizeA primary onClick={getCates}>
                         Get Cates
-                    </Button>
+                    </Button> */}
                     <Button sizeA primary onClick={() => setShowingCreateCateForm(true)}>
                         Create New Cate
                     </Button>

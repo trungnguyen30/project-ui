@@ -7,22 +7,35 @@ const cx = classNames.bind(styles);
 
 function ProdCreateForm(props) {
     const iniData = Object.freeze({
+        Sid: '',
         Categoryid: '',
         ProdName: '',
-        MetaTitle: '',
-        Description: '',
         ImagePath: '',
         Price: '',
+        Quantity: '',
+        Status: '',
     });
 
     const [formData, setFormData] = useState(iniData);
 
     const [listCate, setListCate] = useState([{ Categoryid: '', CategoryName: '' }]);
+    const [listSupplier, setListSupplier] = useState([{ Sid: '', SName: '' }]);
+
     useEffect(() => {
         const fetchData = async () => {
             const resp = await fetch('https://localhost:44397/api/Category');
             const newData = await resp.json();
             setListCate(newData);
+            // console.log(newData);
+        };
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const resp = await fetch('https://localhost:44397/api/Supplier');
+            const newData = await resp.json();
+            setListSupplier(newData);
             // console.log(newData);
         };
         fetchData();
@@ -40,12 +53,15 @@ function ProdCreateForm(props) {
 
         const prodToCreate = {
             Pid: null,
+            Sid: formData.Sid,
             Categoryid: formData.Categoryid,
             ProdName: formData.ProdName,
             MetaTitle: formData.MetaTitle,
             Description: formData.Description,
             ImagePath: formData.ImagePath,
             Price: formData.Price,
+            Quantity: formData.Quantity,
+            Status: formData.Status,
         };
 
         if (!prodToCreate.ProdName) {
@@ -87,6 +103,20 @@ function ProdCreateForm(props) {
             <h1>Create New Prod</h1>
             <div className={cx('wrapper')}>
                 <div>
+                    <label className={cx('lbl')}>Supplier Name:</label>
+                    <select value={formData.Sid} name="Sid" onChange={handleChange} className={cx('selection')}>
+                        <option value="" disabled>
+                            -- Select --
+                        </option>
+                        {listSupplier.map((x) => (
+                            <option value={x.Sid} key={x.Sid}>
+                                {x.SName}
+                            </option>
+                        ))}
+                    </select>
+                    {/* <input className={cx('ip')} value={formData.Categoryid} name="Categoryid" type="text" onChange={handleChange} /> */}
+                </div>
+                <div>
                     <label className={cx('lbl')}>Category Name:</label>
                     <select
                         value={formData.Categoryid}
@@ -116,32 +146,12 @@ function ProdCreateForm(props) {
                     />
                 </div>
                 <div>
-                    <label className={cx('lbl')}>MetaTitle:</label>
-                    <input
-                        className={cx('ip')}
-                        value={formData.MetaTitle}
-                        name="MetaTitle"
-                        type="text"
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <label className={cx('lbl')}>Description:</label>
-                    <input
-                        className={cx('ip')}
-                        value={formData.Description}
-                        name="Description"
-                        type="text"
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
                     <label className={cx('lbl')}>ImagePath:</label>
                     <input
                         className={cx('ip')}
                         value={formData.ImagePath}
                         name="ImagePath"
-                        type="file"
+                        type="text"
                         onChange={handleChange}
                     />
                 </div>
@@ -153,6 +163,27 @@ function ProdCreateForm(props) {
                         name="Price"
                         type="number"
                         pattern="[0-9]"
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label className={cx('lbl')}>Quantity:</label>
+                    <input
+                        className={cx('ip')}
+                        value={formData.Quantity}
+                        name="Quantity"
+                        type="number"
+                        pattern="[0-9]"
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label className={cx('lbl')}>Status:</label>
+                    <input
+                        className={cx('ip')}
+                        value={formData.Status}
+                        name="Status"
+                        type="text"
                         onChange={handleChange}
                     />
                 </div>

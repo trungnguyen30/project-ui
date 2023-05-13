@@ -11,28 +11,10 @@ import Menu from '~/components/Popper/Menu';
 import Heading from '~/components/Layout/components/Heading';
 import Button from '~/components/Layout/components/Button';
 import Search from '../Search';
+import { useState, useEffect } from 'react';
+import ShoppingCart from '~/pages/User/ShoppingCart';
 
 const cx = classNames.bind(styles);
-
-const MENU_ITEMS = [
-    {
-        img: img.asus_rog_strix,
-        title: 'ASUS_ROG_Strix_GeForce_RTX_4090_OC_White_Edition_24GB_GDDR6X',
-        content: 'Mô tả',
-    },
-
-    {
-        img: img.asus_rog_strix,
-        title: 'ASUS_ROG_Strix_GeForce_RTX_4090_OC_White_Edition_24GB_GDDR6X',
-        content: 'Mô tả',
-    },
-
-    {
-        img: img.asus_rog_strix,
-        title: 'ASUS_ROG_Strix_GeForce_RTX_4090_OC_White_Edition_24GB_GDDR6X',
-        content: 'Mô tả',
-    },
-];
 
 function HeaderUser() {
     const usenavigate = useNavigate();
@@ -132,7 +114,7 @@ function HeaderUser() {
 
                 <div className={cx('container')}>
                     <div className={cx('logo')}>
-                        <Button backHome to={'/'}>
+                        <Button backHome to={'/user'}>
                             <img src={img.logo} className={cx('container-logo')} />
                         </Button>
                     </div>
@@ -140,7 +122,14 @@ function HeaderUser() {
                     <Search />
 
                     <div className={cx('cart')}>
-                        <Tippy
+                        {/* <ShoppingCart
+                            visibilty={cartsVisibilty}
+                            products={prodsInCart}
+                            onClose={() => setCartVisible(false)}
+                            onQuantityChange={onQuantityChange}
+                            onProductRemove={onProductRemove}
+                        /> */}
+                        {/* <Tippy
                             interactive
                             // visible
                             placement="bottom-end"
@@ -165,11 +154,12 @@ function HeaderUser() {
                                     </Button>
                                 </Menu>
                             )}
-                        >
-                            <a href="" className={cx('cart-item')}>
-                                <FontAwesomeIcon icon={faCartShopping} className={cx('cart-icon')} />
-                            </a>
-                        </Tippy>
+                        > */}
+                        <Button noBG className={cx('cart-item')} to={'/shopping-cart'}>
+                            <FontAwesomeIcon icon={faCartShopping} className={cx('cart-icon')} />
+                            {/* {prodsInCart.length > 0 && <span>{prodsInCart.length}</span>} */}
+                        </Button>
+                        {/*  */}
                     </div>
                 </div>
             </div>

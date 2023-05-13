@@ -1,9 +1,9 @@
 import axiosClient from './axiosClient';
 
 const END_POINT = {
-    PRODUCTS: 'products',
+    PRODUCT: 'Product',
 };
 
-export const getAPI = () => {
-    return axiosClient.get(`${END_POINT.PRODUCTS}`);
+export const getProds = () => {
+    return axiosClient.get(`${END_POINT.PRODUCT}`);
 };

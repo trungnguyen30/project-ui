@@ -31,6 +31,21 @@ function Sidebar() {
                         Sản phẩm
                     </Button>
                 </li>
+                <li className={cx('category-item')}>
+                    <Button toCate to={'/ad-staff'}>
+                        Nhân viên
+                    </Button>
+                </li>
+                <li className={cx('category-item')}>
+                    <Button toCate to={'/ad-supplier'}>
+                        Nhà cung cấp
+                    </Button>
+                </li>
+                <li className={cx('category-item')}>
+                    <Button toCate to={'/ad-user'}>
+                        Khách hàng
+                    </Button>
+                </li>
             </ul>
         </nav>
     );

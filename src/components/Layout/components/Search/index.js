@@ -12,14 +12,27 @@ const cx = classNames.bind(styles);
 
 function Search() {
     const [searchValue, setSearchValue] = useState('');
-    const [searchResult, setSearchResult] = useState([]);
+    const [searchResult, setSearchResult] = useState({});
     const [showResult, setShowResult] = useState(true);
 
     useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([1]);
-        }, 0);
-    }, []);
+        if (!searchValue) {
+            return;
+        }
+        fetch(`https://localhost:44397/api/default/findProd?Pid=3`)
+            .then((res) => res.json())
+            .then((res) => {
+                setSearchResult(res);
+                console.log(searchResult.Pid);
+            });
+    }, [searchValue]);
+
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         setSearchResult([1, 2, 3]);
+    //     }, 0);
+    //     console.log(searchResult)
+    // }, []);
 
     const handleHideResult = () => {
         setShowResult(false);
@@ -28,7 +41,7 @@ function Search() {
     return (
         <HeadlessTippy
             interactive
-            visible={showResult && searchResult.length > 0}
+            visible={showResult && searchResult.Pid > 0}
             render={(attrs) => (
                 <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                     <PopperWrapper>

@@ -2,28 +2,40 @@ import React, { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import styles from './ProdUpdateForm.module.scss';
 import Button from '~/components/Layout/components/Button';
-import NumericInput from 'react-numeric-input';
 
 const cx = classNames.bind(styles);
 
 function ProdUpdateForm(props) {
     const iniData = Object.freeze({
+        Sid: props.prod.Sid,
         Categoryid: props.prod.Categoryid,
         ProdName: props.prod.ProdName,
-        MetaTitle: props.prod.MetaTitle,
-        Description: props.prod.Description,
         ImagePath: props.prod.ImagePath,
         Price: props.prod.Price,
+        Quantity: props.prod.Quantity,
+        Status: props.prod.Status,
     });
 
     const [formData, setFormData] = useState(iniData);
 
     const [listCate, setListCate] = useState([{ Categoryid: '', CategoryName: '' }]);
+    const [listSupplier, setListSupplier] = useState([{ Sid: '', SName: '' }]);
+
     useEffect(() => {
         const fetchData = async () => {
             const resp = await fetch('https://localhost:44397/api/Category');
             const newData = await resp.json();
             setListCate(newData);
+            // console.log(newData);
+        };
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const resp = await fetch('https://localhost:44397/api/Supplier');
+            const newData = await resp.json();
+            setListSupplier(newData);
             // console.log(newData);
         };
         fetchData();
@@ -41,20 +53,21 @@ function ProdUpdateForm(props) {
 
         const prodToUpdate = {
             Pid: props.prod.Pid,
+            Sid: formData.Sid,
             Categoryid: formData.Categoryid,
             ProdName: formData.ProdName,
-            MetaTitle: formData.MetaTitle,
-            Description: formData.Description,
             ImagePath: formData.ImagePath,
             Price: formData.Price,
+            Quantity: formData.Quantity,
+            Status: formData.Status,
         };
 
         if (!prodToUpdate.ProdName) {
             alert('Empty product name!!');
             return;
-        } else if (prodToUpdate.ProdName.length > 50) {
-            alert('Name maximum 50!!');
-            return;
+            // } else if (prodToUpdate.ProdName.length > 250) {
+            //     alert('Name maximum 250!!');
+            //     return;
         } else if (prodToUpdate.Price.length > 10 || prodToUpdate.Price.length < 7) {
             alert('Number from 7 to 10 characters!!');
             return;
@@ -84,6 +97,26 @@ function ProdUpdateForm(props) {
         <form className={cx('update')}>
             <h1>Update New Prod</h1>
             <div className={cx('wrapper')}>
+                <div>
+                    <label className={cx('lbl')}>Supplier Name:</label>
+                    <select value={formData.Sid} name="Sid" onChange={handleChange} className={cx('selection')}>
+                        <option value="" disabled>
+                            -- Select --
+                        </option>
+                        {listSupplier.map((x) => (
+                            <option value={x.Sid} key={x.Sid}>
+                                {x.SName}
+                            </option>
+                        ))}
+                    </select>
+                    {/* <input
+                        className={cx('ip')}
+                        value={formData.Categoryid}
+                        name="Categoryid"
+                        type="text"
+                        onChange={handleChange}
+                    /> */}
+                </div>
                 <div>
                     <label className={cx('lbl')}>Category Name:</label>
                     <select
@@ -120,26 +153,6 @@ function ProdUpdateForm(props) {
                     />
                 </div>
                 <div>
-                    <label className={cx('lbl')}>MetaTitle:</label>
-                    <input
-                        className={cx('ip')}
-                        value={formData.MetaTitle}
-                        name="MetaTitle"
-                        type="text"
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <label className={cx('lbl')}>Description:</label>
-                    <input
-                        className={cx('ip')}
-                        value={formData.Description}
-                        name="Description"
-                        type="text"
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
                     <label className={cx('lbl')}>ImagePath:</label>
                     <input
                         className={cx('ip')}
@@ -164,6 +177,27 @@ function ProdUpdateForm(props) {
                         value={formData.Price}
                         name="Price"
                         type="number"
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label className={cx('lbl')}>Quantity:</label>
+                    <input
+                        className={cx('ip')}
+                        value={formData.Quantity}
+                        name="Quantity"
+                        type="number"
+                        pattern="[0-9]"
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label className={cx('lbl')}>Status:</label>
+                    <input
+                        className={cx('ip')}
+                        value={formData.Status}
+                        name="Status"
+                        type="text"
                         onChange={handleChange}
                     />
                 </div>

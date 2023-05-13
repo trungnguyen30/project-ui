@@ -75,17 +75,24 @@ function Home() {
             <div className={cx('product')}>
                 <div className={cx('grid-row')}>
                     {prods.map((prod) => (
-                        <div className={cx('grid-column-2-4')}>
+                        <div className={cx('grid-column-2-4')} key={prod.Pid}>
                             <div className={cx('product-item')}>
-                                <Button toDetail to={'/product'}>
-                                    <div className={cx('product-img')}>
-                                        <Image src={'assets/img/' + `${prod.ImagePath}`} className={cx('img')} />
-                                    </div>
-                                </Button>
+                                <div className={cx('product-img')}>
+                                    <Image src={'assets/img/' + `${prod.ImagePath}`} className={cx('img')} />
+                                </div>
                                 <h4 className={cx('product-title')}>{prod.ProdName}</h4>
                                 <div className={cx('product-price')}>
                                     <span className={cx('old-price')}>1.200.000đ</span>
                                     <span className={cx('new-price')}>{prod.Price}đ</span>
+                                </div>
+                                <div className={cx('buttons')}>
+                                    <Button className={cx('btn')}>Details</Button>
+                                    <Button
+                                        className={cx('btn')}
+                                        // onClick={() => addToCart(prod)}
+                                    >
+                                        Add to cart
+                                    </Button>
                                 </div>
                             </div>
                         </div>
