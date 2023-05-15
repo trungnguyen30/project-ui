@@ -147,7 +147,7 @@ function Form() {
                     <div className={cx('input-box')}>
                         <input
                             placeholder="Mật khẩu"
-                            type="text"
+                            type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />

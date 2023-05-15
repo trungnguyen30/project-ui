@@ -18,8 +18,8 @@ function ProdUpdateForm(props) {
 
     const [formData, setFormData] = useState(iniData);
 
-    const [listCate, setListCate] = useState([{ Categoryid: '', CategoryName: '' }]);
-    const [listSupplier, setListSupplier] = useState([{ Sid: '', SName: '' }]);
+    const [listCate, setListCate] = useState([]);
+    const [listSupplier, setListSupplier] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -164,7 +164,7 @@ function ProdUpdateForm(props) {
                         className={cx('ip')}
                         value={formData.ImagePath}
                         name="ImagePath"
-                        type="file"
+                        type="text"
                         onChange={handleChange}
                     />
                 </div>

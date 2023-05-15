@@ -20,6 +20,7 @@ function HeaderUser() {
     const usenavigate = useNavigate();
     const userName = JSON.parse(localStorage.getItem('user'));
     const handleLogout = () => {
+        alert('Đăng xuất thành công!!');
         localStorage.removeItem('loggedIn');
         localStorage.removeItem('user');
         usenavigate('/login');
@@ -107,7 +108,7 @@ function HeaderUser() {
                         </li>
 
                         <li className={cx('navbar-item')}>
-                            <Button logIn>Welcome {userName.User_Username}</Button>
+                            <Button logIn>Welcome, {userName.User_Username}</Button>
                         </li>
                     </ul>
                 </div>
@@ -119,7 +120,7 @@ function HeaderUser() {
                         </Button>
                     </div>
 
-                    <Search />
+                    {/* <Search /> */}
 
                     <div className={cx('cart')}>
                         {/* <ShoppingCart

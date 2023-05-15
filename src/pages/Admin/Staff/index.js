@@ -119,7 +119,7 @@ function Ad_Staff() {
         return (
             <>
                 <div className={cx('search')}>
-                    <input placeholder="Nhập sản phẩm cần tìm kiếm..." onChange={(e) => setSearch(e.target.value)} />
+                    <input placeholder="Nhập nhân viên cần tìm kiếm..." onChange={(e) => setSearch(e.target.value)} />
                 </div>
                 <table className={cx('table-prod')}>
                     <thead>

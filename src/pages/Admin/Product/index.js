@@ -5,6 +5,7 @@ import Button from '~/components/Layout/components/Button';
 import ProdCreateForm from './Method/Create/ProdCreateForm';
 import ProdUpdateForm from './Method/Update/ProdUpdateForm';
 import Image from '~/components/Layout/components/Image';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -13,6 +14,7 @@ function Ad_Product() {
     const [showingProdCreateForm, setShowingProdCreateForm] = useState(false);
     const [prodCurrently, setProdCurrently] = useState(null);
     const [search, setSearch] = useState('');
+    const usenavigate = useNavigate();
 
     function getProds() {
         const url = 'https://localhost:44397/api/Product';

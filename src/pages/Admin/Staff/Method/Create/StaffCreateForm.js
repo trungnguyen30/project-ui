@@ -52,7 +52,7 @@ function StaffCreateForm(props) {
         };
 
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-        const number = [0 - 9];
+        const number = /^[0-9]{0,10}$/;
         if (!staffToCreate.Staff_Username) {
             alert('Empty username');
             return;
@@ -64,10 +64,10 @@ function StaffCreateForm(props) {
         if (!staffToCreate.Name) {
             alert('Empty name');
             return;
-        } else if (!staffToCreate.Name < 5) {
+        } else if (staffToCreate.Name < 5) {
             alert('Name must be more than 4 characters');
             return;
-        } else if (!staffToCreate.Name > 40) {
+        } else if (staffToCreate.Name > 40) {
             alert('Name cannot exceed more than 10 characters');
             return;
         }

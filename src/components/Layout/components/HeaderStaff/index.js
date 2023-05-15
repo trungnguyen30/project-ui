@@ -18,6 +18,7 @@ function HeaderStaff() {
     const usenavigate = useNavigate();
     const userName = JSON.parse(localStorage.getItem('staff'));
     const handleLogout = () => {
+        alert('Đăng xuất thành công!!');
         localStorage.removeItem('loggedIn');
         localStorage.removeItem('staff');
         usenavigate('/login');

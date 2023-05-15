@@ -47,7 +47,7 @@ function SupplierCreateForm(props) {
             PostalCode: formData.PostalCode,
         };
 
-        const number = [0 - 9];
+        const number = /^[0-9]{0,10}$/;
         if (!supplierToCreate.ProducerId) {
             alert('Empty producer name');
             return;
@@ -55,7 +55,7 @@ function SupplierCreateForm(props) {
         if (!supplierToCreate.SName) {
             alert('Empty name');
             return;
-        } else if (!supplierToCreate.SName > 40) {
+        } else if (supplierToCreate.SName > 40) {
             alert("Name cannot exceed more than 40 characters'");
             return;
         }

@@ -40,7 +40,7 @@ function StaffUpdateForm(props) {
         };
 
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-        const number = [0 - 9];
+        const number = /^[0-9]{0,10}$/;
         if (!staffToUpdate.Staff_Username) {
             alert('Empty username');
             return;
@@ -52,10 +52,10 @@ function StaffUpdateForm(props) {
         if (!staffToUpdate.Name) {
             alert('Empty name');
             return;
-        } else if (!staffToUpdate.Name < 5) {
+        } else if (staffToUpdate.Name < 1) {
             alert('Name must be more than 4 characters');
             return;
-        } else if (!staffToUpdate.Name > 40) {
+        } else if (staffToUpdate.Name > 40) {
             alert('Name cannot exceed more than 10 characters');
             return;
         }
@@ -128,13 +128,7 @@ function StaffUpdateForm(props) {
                 </div>
                 <div>
                     <label className={cx('lbl')}>Name: </label>
-                    <input
-                        className={cx('ip')}
-                        value={formData.Name}
-                        name="Name"
-                        type="text"
-                        onChange={handleChange}
-                    />
+                    <input className={cx('ip')} value={formData.Name} name="Name" type="text" onChange={handleChange} />
                 </div>
                 <div>
                     <label className={cx('lbl')}>Phone: </label>

@@ -15,6 +15,7 @@ const cx = classNames.bind(styles);
 function Home() {
     const [prods, setProds] = useState([]);
     const [carts, setCart] = useState(JSON.parse(localStorage.getItem('prod-added')) || []);
+
     const addToCart = (data) => {
         const prodExist = carts.find((item) => item.Pid === data.Pid);
         localStorage.setItem('prod-added', JSON.stringify(carts));
@@ -52,50 +53,11 @@ function Home() {
 
     return (
         <div className={cx('wrapper')}>
-            <div className={cx('filter')}>
-                <span className={cx('filter-label')}>Sắp xếp theo</span>
-                <Button sizeA>Phổ biến</Button>
-                <Button sizeA disableHover>
-                    Mới nhất
-                </Button>
-                <Button sizeA>Bán chạy</Button>
-
-                <Tippy
-                    interactive
-                    // visible
-                    placement="bottom-start"
-                    render={(attrs) => (
-                        <div className={cx('price-list')}>
-                            <PopperWrapper>
-                                <PriceItem />
-                            </PopperWrapper>
-                        </div>
-                    )}
-                >
-                    <div className={cx('price')}>
-                        <span className={cx('price-label')}>Giá</span>
-                        <FontAwesomeIcon icon={faCaretDown} className={cx('icon')} />
-                    </div>
-                </Tippy>
-
-                <div className={cx('filter-page')}>
-                    <span className={cx('filter-num')}>1/14</span>
-                    <div className={cx('filter-control')}>
-                        <Button sizeB>
-                            <FontAwesomeIcon icon={faChevronLeft} className={cx('filter-icon')} />
-                        </Button>
-                        <Button sizeB>
-                            <FontAwesomeIcon icon={faChevronRight} className={cx('filter-icon')} />
-                        </Button>
-                    </div>
-                </div>
-            </div>
-
             <div className={cx('product')}>
                 <ProductList prods={prods} addToCart={addToCart} />
             </div>
 
-            <div className={cx('pagination')}>
+            {/* <div className={cx('pagination')}>
                 <ul className={cx('pagination-list')}>
                     <li className={cx('pagination-item')}>
                         <Button noBG>
@@ -128,7 +90,7 @@ function Home() {
                         </Button>
                     </li>
                 </ul>
-            </div>
+            </div> */}
         </div>
     );
 }

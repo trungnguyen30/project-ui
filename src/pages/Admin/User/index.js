@@ -99,7 +99,7 @@ function Ad_User() {
         return (
             <>
                 <div className={cx('search')}>
-                    <input placeholder="Nhập sản phẩm cần tìm kiếm..." onChange={(e) => setSearch(e.target.value)} />
+                    <input placeholder="Nhập khách hàng cần tìm kiếm..." onChange={(e) => setSearch(e.target.value)} />
                 </div>
                 <table className={cx('table-prod')}>
                     <thead>

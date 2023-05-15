@@ -131,7 +131,7 @@ function Header() {
                         </Button>
                     </div>
 
-                    <Search />
+                    {/* <Search /> */}
 
                     <div className={cx('cart')}>
                         {/* <Tippy

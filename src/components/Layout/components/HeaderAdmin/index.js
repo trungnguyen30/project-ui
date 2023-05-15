@@ -18,6 +18,7 @@ function HeaderAdmin() {
     const usenavigate = useNavigate();
     const userName = JSON.parse(localStorage.getItem('admin'));
     const handleLogout = () => {
+        alert('Đăng xuất thành công!!');
         localStorage.removeItem('loggedIn');
         localStorage.removeItem('admin');
         usenavigate('/login');
@@ -107,7 +108,7 @@ function HeaderAdmin() {
                     </li>
 
                     <li className={cx('navbar-item')}>
-                        <Button logIn>Welcome {userName.Ad_Username}</Button>
+                        <Button logIn>Welcome, {userName.Ad_Username}</Button>
                     </li>
                 </ul>
             </div>

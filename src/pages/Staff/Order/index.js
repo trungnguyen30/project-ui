@@ -33,7 +33,7 @@ function Order() {
         return (
             <>
                 <div className={cx('search')}>
-                    <input placeholder="Nhập sản phẩm cần tìm kiếm..." onChange={(e) => setSearch(e.target.value)} />
+                    <input placeholder="Nhập phiếu cần tìm kiếm..." onChange={(e) => setSearch(e.target.value)} />
                 </div>
                 <div>
                     {orders

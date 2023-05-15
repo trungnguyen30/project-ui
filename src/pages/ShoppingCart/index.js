@@ -33,8 +33,8 @@ function Guest_ShoppingCart() {
     };
     const onProductClear = () => {
         localStorage.removeItem('prod-added');
-        alert('Checkout Successful!!');
-        usenavigate('/');
+        alert('Please signup to pay');
+        usenavigate('/signup');
     };
     return (
         <div className={cx('shopping-cart')}>
@@ -68,7 +68,7 @@ function Guest_ShoppingCart() {
                         <Button onClick={() => onProductRemove(prod)}>Xóa</Button>
                     </div>
                 ))}
-                {products.length > 0 && <Button onClick={onProductClear}>Proceed to checkout</Button>}
+                {products.length > 0 && <Button onClick={onProductClear}>Thanh toán</Button>}
             </div>
         </div>
     );

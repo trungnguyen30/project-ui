@@ -130,7 +130,7 @@ function Form() {
                             <div className={cx('input-box')}>
                                 <input
                                     placeholder="Mật khẩu"
-                                    type="text"
+                                    type="password"
                                     name="User_Password"
                                     value={formData.User_Password}
                                     onChange={handleChange}
@@ -139,7 +139,7 @@ function Form() {
                             <div className={cx('input-box')}>
                                 <input
                                     placeholder="Xác nhận mật khẩu"
-                                    type="text"
+                                    type="password"
                                     value={repassword}
                                     onChange={(e) => setRePassword(e.target.value)}
                                 />

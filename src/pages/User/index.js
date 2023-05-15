@@ -53,7 +53,7 @@ function User() {
 
     return (
         <div className={cx('wrapper')}>
-            <div className={cx('filter')}>
+            {/* <div className={cx('filter')}>
                 <span className={cx('filter-label')}>Sắp xếp theo</span>
                 <Button sizeA>Phổ biến</Button>
                 <Button sizeA disableHover>
@@ -90,7 +90,7 @@ function User() {
                         </Button>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             <div className={cx('product')}>
                 <ProductList prods={prods} addToCart={addToCart} />

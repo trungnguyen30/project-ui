@@ -33,7 +33,7 @@ function ShoppingCart() {
     };
     const onProductClear = () => {
         localStorage.removeItem('prod-added');
-        alert('Checkout Successful!!');
+        alert('Thanh toán thành công!!');
         usenavigate('/user');
     };
     return (
@@ -68,7 +68,15 @@ function ShoppingCart() {
                         <Button onClick={() => onProductRemove(prod)}>Xóa</Button>
                     </div>
                 ))}
-                {products.length > 0 && <Button onClick={onProductClear}>Proceed to checkout</Button>}
+                {products.length > 0 && (
+                    <Button
+                        onClick={() => {
+                            if (window.confirm(`Bạn muốn thanh toán ?`)) onProductClear();
+                        }}
+                    >
+                        Thanh toán
+                    </Button>
+                )}
             </div>
         </div>
     );

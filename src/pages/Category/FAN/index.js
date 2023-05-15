@@ -80,7 +80,7 @@ function FAN() {
                                 </div>
                                 <h4 className={cx('product-title')}>{prod.ProdName}</h4>
                                 <div className={cx('product-price')}>
-                                    <span className={cx('old-price')}>1.200.000đ</span>
+                                    <span className={cx('old-price')}>99.200.000đ</span>
                                     <span className={cx('new-price')}>{prod.Price}đ</span>
                                 </div>
                                 <div className={cx('buttons')}>
