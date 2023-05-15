@@ -39,19 +39,48 @@ function StaffUpdateForm(props) {
             DateStartWork: formData.DateStartWork,
         };
 
-        // if (!prodToCreate.ProdName) {
-        //     alert('Empty product name!!');
-        //     return;
-        // } else if (prodToCreate.ProdName.length > 50) {
-        //     alert('Name maximum 50!!');
-        //     return;
-        // } else if (prodToCreate.Price.length > 10 || prodToCreate.Price.length < 7) {
-        //     alert('Number from 7 to 10 characters!!');
-        //     return;
-        // } else if (prodToCreate.Categoryid === '') {
-        //     alert('Category Name must be selected!!');
-        //     return;
-        // }
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+        const number = [0 - 9];
+        if (!staffToUpdate.Staff_Username) {
+            alert('Empty username');
+            return;
+        }
+        if (!staffToUpdate.Staff_Password) {
+            alert('Empty password');
+            return;
+        }
+        if (!staffToUpdate.Name) {
+            alert('Empty name');
+            return;
+        } else if (!staffToUpdate.Name < 5) {
+            alert('Name must be more than 4 characters');
+            return;
+        } else if (!staffToUpdate.Name > 40) {
+            alert('Name cannot exceed more than 10 characters');
+            return;
+        }
+        if (!staffToUpdate.Phone) {
+            alert('Empty phone');
+            return;
+        } else if (!number.test(staffToUpdate.Phone)) {
+            alert('Phone is number!!');
+            return;
+        }
+        if (!staffToUpdate.Email) {
+            alert('Empty email');
+            return;
+        } else if (!regex.test(staffToUpdate.Email)) {
+            alert('This is not a valid email format!');
+            return;
+        }
+        if (!staffToUpdate.Address) {
+            alert('Empty address');
+            return;
+        }
+        if (!staffToUpdate.DateStartWork) {
+            alert('Empty date start work');
+            return;
+        }
 
         const url = 'https://localhost:44397/api/Staff';
         fetch(url, {

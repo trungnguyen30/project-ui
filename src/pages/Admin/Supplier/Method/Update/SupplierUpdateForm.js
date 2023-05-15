@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import styles from './SupplierUpdateForm.module.scss';
 import Button from '~/components/Layout/components/Button';
@@ -46,19 +46,32 @@ function SupplierUpdateForm(props) {
             PostalCode: formData.PostalCode,
         };
 
-        // if (!prodToCreate.ProdName) {
-        //     alert('Empty product name!!');
-        //     return;
-        // } else if (prodToCreate.ProdName.length > 50) {
-        //     alert('Name maximum 50!!');
-        //     return;
-        // } else if (prodToCreate.Price.length > 10 || prodToCreate.Price.length < 7) {
-        //     alert('Number from 7 to 10 characters!!');
-        //     return;
-        // } else if (prodToCreate.Categoryid === '') {
-        //     alert('Category Name must be selected!!');
-        //     return;
-        // }
+        const number = [0 - 9];
+        if (!supplierToUpdate.ProducerId) {
+            alert('Empty producer name');
+            return;
+        }
+        if (!supplierToUpdate.SName) {
+            alert('Empty name');
+            return;
+        } else if (!supplierToUpdate.SName > 40) {
+            alert("Name cannot exceed more than 40 characters'");
+            return;
+        }
+        if (!supplierToUpdate.Phone) {
+            alert('Empty phone');
+            return;
+        } else if (!number.test(supplierToUpdate.Phone)) {
+            alert('Phone is number');
+            return;
+        }
+        if (!supplierToUpdate.PostalCode) {
+            alert('Empty postal code');
+            return;
+        } else if (!number.test(supplierToUpdate.PostalCode)) {
+            alert('Postal Code is number');
+            return;
+        }
 
         const url = 'https://localhost:44397/api/Supplier';
         fetch(url, {

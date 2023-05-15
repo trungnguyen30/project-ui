@@ -25,6 +25,7 @@ function Button({
     backHome,
     toDetail,
     toCate,
+    toCateAdmin,
     onClick,
 }) {
     let Comp = 'button';
@@ -58,6 +59,7 @@ function Button({
         backHome,
         toDetail,
         toCate,
+        toCateAdmin,
     });
 
     return (

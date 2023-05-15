@@ -159,3 +159,18 @@
         right: -4px;
     }
 }
+
+.toCateAdmin {
+    width: 290px;
+    font-size: 1.4rem;
+    margin-left: 4px;
+    display: inline-block;
+    color: var(--text-color);
+    position: relative;
+    right: 0;
+    transition: right linear 0.2s;
+    &:hover {
+        color: var(--primary-color);
+        right: -4px;
+    }
+}

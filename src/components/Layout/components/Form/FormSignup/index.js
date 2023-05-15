@@ -31,7 +31,6 @@ function Form() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         const userRegis = {
             Userid: null,
             User_Username: formData.User_Username,
@@ -43,7 +42,52 @@ function Form() {
             User_Role: 'User',
         };
 
-        const url = 'https://localhost:44397/api/user_regis';
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+        const number = [0 - 9];
+        if (!userRegis.User_Username) {
+            alert('Username is required!');
+            return;
+        }
+        if (!repassword) {
+            alert('Repassword is required!');
+            return;
+        }
+        if (!userRegis.Address) {
+            alert('Address is required!');
+            return;
+        }
+        if (!userRegis.Phone) {
+            alert('Phone is required!');
+            return;
+        } else if (!number.test(userRegis.Phone)) {
+            alert('Phone is number!!');
+        } else if (userRegis.Phone.length < 0) {
+            alert('Phone must be more than 0 characters');
+            return;
+        } else if (userRegis.Phone.length > 10) {
+            alert('Phone cannot exceed more than 10 characters');
+            return;
+        }
+        if (!userRegis.Email) {
+            alert('Email is required!');
+            return;
+        } else if (!regex.test(userRegis.Email)) {
+            alert('This is not a valid email format!');
+            return;
+        }
+        if (!userRegis.User_Password) {
+            alert('Password is required!');
+            return;
+        } else if (userRegis.User_Password.length > 10) {
+            alert('Password cannot exceed more than 10 characters');
+            return;
+        }
+        if (userRegis.User_Password !== repassword) {
+            alert('Password and repassword incorrect');
+            return;
+        }
+
+        const url = 'https://localhost:44397/api/regis';
         fetch(url, {
             method: 'POST',
             headers: {
@@ -54,6 +98,7 @@ function Form() {
             .then((response) => response.json())
             .then((result) => {
                 console.log(result);
+                alert('Đăng ký thành công!!');
             })
             .catch((error) => {
                 console.log(error);
@@ -78,6 +123,7 @@ function Form() {
                                     placeholder="Tên đăng nhập"
                                     type="text"
                                     name="User_Username"
+                                    value={formData.User_Username}
                                     onChange={handleChange}
                                 />
                             </div>
@@ -86,6 +132,7 @@ function Form() {
                                     placeholder="Mật khẩu"
                                     type="text"
                                     name="User_Password"
+                                    value={formData.User_Password}
                                     onChange={handleChange}
                                 />
                             </div>
@@ -100,16 +147,40 @@ function Form() {
                         </div>
                         <div className={cx('row-inner')}>
                             <div className={cx('input-box')}>
-                                <input placeholder="Họ và tên" type="text" name="Name" onChange={handleChange} />
+                                <input
+                                    placeholder="Họ và tên"
+                                    type="text"
+                                    name="Name"
+                                    value={formData.Name}
+                                    onChange={handleChange}
+                                />
                             </div>
                             <div className={cx('input-box')}>
-                                <input placeholder="Điện thoại" type="text" name="Phone" onChange={handleChange} />
+                                <input
+                                    placeholder="Điện thoại"
+                                    type="text"
+                                    name="Phone"
+                                    value={formData.Phone}
+                                    onChange={handleChange}
+                                />
                             </div>
                             <div className={cx('input-box')}>
-                                <input placeholder="Email" type="text" name="Email" onChange={handleChange} />
+                                <input
+                                    placeholder="Email"
+                                    type="text"
+                                    name="Email"
+                                    value={formData.Email}
+                                    onChange={handleChange}
+                                />
                             </div>
                             <div className={cx('input-box')}>
-                                <input placeholder="Địa chỉ" type="text" name="Address" onChange={handleChange} />
+                                <input
+                                    placeholder="Địa chỉ"
+                                    type="text"
+                                    name="Address"
+                                    value={formData.Address}
+                                    onChange={handleChange}
+                                />
                             </div>
                         </div>
                     </div>

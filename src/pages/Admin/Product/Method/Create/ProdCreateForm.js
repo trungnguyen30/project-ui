@@ -67,14 +67,17 @@ function ProdCreateForm(props) {
         if (!prodToCreate.ProdName) {
             alert('Empty product name!!');
             return;
-        } else if (prodToCreate.ProdName.length > 50) {
-            alert('Name maximum 50!!');
+        } else if (prodToCreate.ProdName.length > 100) {
+            alert('Product name cannot exceed more than 100 characters!');
             return;
         } else if (prodToCreate.Price.length > 10 || prodToCreate.Price.length < 7) {
-            alert('Number from 7 to 10 characters!!');
+            alert('Price from 7 to 10 characters!!');
             return;
         } else if (prodToCreate.Categoryid === '') {
-            alert('Category Name must be selected!!');
+            alert('Category name must be selected!!');
+            return;
+        } else if (prodToCreate.Sid === '') {
+            alert('Supplier name must be selected!!');
             return;
         }
 
@@ -151,7 +154,7 @@ function ProdCreateForm(props) {
                         className={cx('ip')}
                         value={formData.ImagePath}
                         name="ImagePath"
-                        type="text"
+                        type="file"
                         onChange={handleChange}
                     />
                 </div>

@@ -117,11 +117,11 @@ function Form() {
                 alert(error);
             });
         if (!username) {
-            alert('Please enter username!!');
+            alert('Username is required!!');
             return;
         }
         if (!password) {
-            alert('Please enter password!!');
+            alert('Password is required!!');
             return;
         }
     };

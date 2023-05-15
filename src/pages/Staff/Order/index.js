@@ -1,12 +1,19 @@
 import classNames from 'classnames/bind';
 import styles from './Order.module.scss';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import '@progress/kendo-theme-material/dist/all.css';
+import { Button } from '@progress/kendo-react-buttons';
+import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
 
 const cx = classNames.bind(styles);
 
 function Order() {
     const [orders, setOrder] = useState([]);
     const [search, setSearch] = useState('');
+    const contentArea = useRef(null);
+    const handleExport = (e) => {
+        savePDF(contentArea.current, { paperSize: 'A4' });
+    };
     useEffect(() => {
         const url = 'https://localhost:44397/api/Order';
         fetch(url, {
@@ -26,10 +33,7 @@ function Order() {
         return (
             <>
                 <div className={cx('search')}>
-                    <input
-                        placeholder="Nhập sản phẩm cần tìm kiếm..."
-                        onChange={(e) => setSearch(e.target.value)}
-                    />
+                    <input placeholder="Nhập sản phẩm cần tìm kiếm..." onChange={(e) => setSearch(e.target.value)} />
                 </div>
                 <div>
                     {orders
@@ -37,27 +41,30 @@ function Order() {
                             return search.toLowerCase() === '' ? item : item.ProdName.toLowerCase().includes(search);
                         })
                         .map((order) => (
-                            <div key={order.OrderId}>                                
-                                <p>Tên sản phẩm: {order.ProdName}</p>
-                                <p>Ngày đặt hàng: {order.OrderDate}</p>
-                                <p>Ngày xuất: {order.ExportDate}</p>
-                                <p>Số lượng đặt: {order.Quantity}</p>
-                                <p>Giá: {order.UnitPrice}</p>
-                                <p>Tổng: {order.Total}</p>
-                                <p>Tên khách hàng: {order.Name}</p>
-                                <p>Số điện thoại: {order.Phone}</p>
-                                <p>Email: {order.Email}</p>
-                                <p>Địa chỉ: {order.Address}</p>
-                                <p>--------------------------------</p>
-                            </div>
+                            <PDFExport>
+                                <div ref={contentArea}>
+                                    <div key={order.OrderId}>
+                                        <p>Ten san pham: {order.ProdName}</p>
+                                        <p>Ngay dat hang: {order.OrderDate}</p>
+                                        <p>Ngay xuat: {order.ExportDate}</p>
+                                        <p>So luong dat: {order.Quantity}</p>
+                                        <p>Gia: {order.UnitPrice}</p>
+                                        <p>Tong: {order.Total}</p>
+                                        <p>Ten khach hang: {order.Name}</p>
+                                        <p>So dien thoai: {order.Phone}</p>
+                                        <p>Email: {order.Email}</p>
+                                        <p>Dia chi: {order.Address}</p>
+                                    </div>
+                                </div>
+                                <Button onClick={handleExport}>Export</Button>
+                                <p>------------------------------------</p>
+                            </PDFExport>
                         ))}
                 </div>
             </>
         );
     }
-    return <div className='grid'>
-        {orders.length > 0 && renderOrder()}
-    </div>;
+    return <div className="grid">{orders.length > 0 && renderOrder()}</div>;
 }
 
 export default Order;

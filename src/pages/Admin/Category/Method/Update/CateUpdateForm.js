@@ -29,6 +29,14 @@ function CateUpdateForm(props) {
             MetaTitle: formData.MetaTitle,
         };
 
+        if (!cateToUpdate.CategoryName) {
+            alert('Empty category name!!');
+            return;
+        } else if (cateToUpdate.CategoryName.length > 100) {
+            alert('Category name cannot exceed more than 100 characters!');
+            return;
+        }
+
         const url = 'https://localhost:44397/api/Category';
         fetch(url, {
             method: 'PUT',

@@ -134,7 +134,7 @@ function Header() {
                     <Search />
 
                     <div className={cx('cart')}>
-                        <Tippy
+                        {/* <Tippy
                             interactive
                             // visible
                             placement="bottom-end"
@@ -163,7 +163,11 @@ function Header() {
                             <a href="" className={cx('cart-item')}>
                                 <FontAwesomeIcon icon={faCartShopping} className={cx('cart-icon')} />
                             </a>
-                        </Tippy>
+                        </Tippy> */}
+                        <Button noBG className={cx('cart-item')} to={'/guest-cart'}>
+                            <FontAwesomeIcon icon={faCartShopping} className={cx('cart-icon')} />
+                            {/* {prodsInCart.length > 0 && <span>{prodsInCart.length}</span>} */}
+                        </Button>
                     </div>
                 </div>
             </div>

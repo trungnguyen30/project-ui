@@ -7,8 +7,8 @@ function StaffLayout({ children }) {
         <div>
             <HeaderStaff />
             <div className="container">
-                <div className="grid">
-                    <div className="grid-row main-container">
+                <div className="max">
+                    <div className="max-row main-container">
                         <div className="grid-column-2">
                             <Sidebar />
                         </div>

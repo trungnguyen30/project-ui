@@ -1,12 +1,19 @@
 import classNames from 'classnames/bind';
 import styles from './Receipt.module.scss';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import '@progress/kendo-theme-material/dist/all.css';
+import { Button } from '@progress/kendo-react-buttons';
+import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
 
 const cx = classNames.bind(styles);
 
 function Receipt() {
     const [receipts, setReceipt] = useState([]);
     const [search, setSearch] = useState('');
+    const contentArea = useRef(null);
+    const handleExport = (e) => {
+        savePDF(contentArea.current, { paperSize: 'A4' });
+    };
     useEffect(() => {
         const url = 'https://localhost:44397/api/Receipt';
         fetch(url, {
@@ -34,19 +41,24 @@ function Receipt() {
                             return search.toLowerCase() === '' ? item : item.ProdName.toLowerCase().includes(search);
                         })
                         .map((receipt) => (
-                            <div key={receipt.Rid}>
-                                <p>Tên sản phẩm: {receipt.ProdName}</p>
-                                <p>Ngày nhập: {receipt.InputDate}</p>
-                                <p>Số lượng nhập: {receipt.Quantity}</p>
-                                <p>Giá: {receipt.UnitPrice}</p>
-                                <p>Tổng: {receipt.Total}</p>
-                                <p>Địa chỉ: {receipt.Address}</p>
-                                <p>Nhà cung cấp: {receipt.SName}</p>
-                                <p>Số điện thoại: {receipt.Phone}</p>
-                                <p>Nhà sản xuất: {receipt.ProducerName}</p>
-                                <p>Quốc gia: {receipt.Nation}</p>
+                            <PDFExport>
+                                <div ref={contentArea}>
+                                    <div key={receipt.Rid}>
+                                        <p>Ten san pham: {receipt.ProdName}</p>
+                                        <p>Ngay nhap: {receipt.InputDate}</p>
+                                        <p>So luong nhap: {receipt.Quantity}</p>
+                                        <p>Gia: {receipt.UnitPrice}</p>
+                                        <p>Tong: {receipt.Total}</p>
+                                        <p>Dia chi: {receipt.Address}</p>
+                                        <p>Nha cung cap: {receipt.SName}</p>
+                                        <p>So dien thoai: {receipt.Phone}</p>
+                                        <p>Nha san xuat: {receipt.ProducerName}</p>
+                                        <p>Quoc gia: {receipt.Nation}</p>
+                                    </div>
+                                </div>
+                                <Button onClick={handleExport}>Export</Button>
                                 <p>------------------------------------</p>
-                            </div>
+                            </PDFExport>
                         ))}
                 </div>
             </>

@@ -32,8 +32,8 @@ function CateCreateForm(props) {
         if (!cateToCreate.CategoryName) {
             alert('Empty category name!!');
             return;
-        } else if (cateToCreate.CategoryName.length > 40) {
-            alert('Name maximum 40!!');
+        } else if (cateToCreate.CategoryName.length > 100) {
+            alert('Category Name cannot exceed more than 100 characters!');
             return;
         }
 

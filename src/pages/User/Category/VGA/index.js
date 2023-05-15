@@ -1,10 +1,11 @@
 import { faCaretDown, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react/headless';
+import { useState, useEffect } from 'react';
 
 import classNames from 'classnames/bind';
 import styles from './VGA.module.scss';
-import img from '~/assets/img';
+import Image from '~/components/Layout/components/Image';
 import Button from '~/components/Layout/components/Button';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import PriceItem from '~/components/Layout/components/PriceItem';
@@ -12,6 +13,22 @@ import PriceItem from '~/components/Layout/components/PriceItem';
 const cx = classNames.bind(styles);
 
 function User_VGA() {
+    const [prods, getProds] = useState([]);
+    useEffect(() => {
+        const url = 'https://localhost:44397/api/Product/3';
+        fetch(url, {
+            method: 'GET',
+        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log(result);
+                getProds(result);
+            })
+            .catch((error) => {
+                console.log(error);
+                alert(error);
+            });
+    }, []);
     return (
         <div className={cx('wrapper')}>
             <div className={cx('filter')}>
@@ -55,58 +72,33 @@ function User_VGA() {
 
             <div className={cx('product')}>
                 <div className={cx('grid-row')}>
-                    <div className={cx('grid-column-2-4')}>
-                        <div className={cx('product-item')}>
-                            <Button toDetail to={'/product'}>
+                    {prods.map((prod) => (
+                        <div className={cx('grid-column-2-4')} key={prod.Pid}>
+                            <div className={cx('product-item')}>
                                 <div className={cx('product-img')}>
-                                    <img src={img.asus_rog_strix} className={cx('img')} />
+                                    <Image src={'assets/img/' + `${prod.ImagePath}`} className={cx('img')} />
                                 </div>
-                            </Button>
-                            <h4 className={cx('product-title')}>
-                                ASUS ROG Strix GeForce RTX 4090 OC White Edition 24GB GDDR6X
-                            </h4>
-                            <div className={cx('product-price')}>
-                                <span className={cx('old-price')}>1.200.000đ</span>
-                                <span className={cx('new-price')}>999.000đ</span>
+                                <h4 className={cx('product-title')}>{prod.ProdName}</h4>
+                                <div className={cx('product-price')}>
+                                    <span className={cx('old-price')}>1.200.000đ</span>
+                                    <span className={cx('new-price')}>{prod.Price}đ</span>
+                                </div>
+                                <div className={cx('buttons')}>
+                                    <Button className={cx('btn')}>Details</Button>
+                                    <Button
+                                        className={cx('btn')}
+                                        // onClick={() => addToCart(prod)}
+                                    >
+                                        Add to cart
+                                    </Button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div className={cx('grid-column-2-4')}>
-                        <div className={cx('product-item')}>
-                            <Button toDetail to={'/product'}>
-                                <div className={cx('product-img')}>
-                                    <img src={img.asus_rog_strix_white} className={cx('img')} />
-                                </div>
-                            </Button>
-                            <h4 className={cx('product-title')}>
-                                ASUS ROG Strix GeForce RTX 4090 OC White Edition 24GB GDDR6X
-                            </h4>
-                            <div className={cx('product-price')}>
-                                <span className={cx('old-price')}>1.200.000đ</span>
-                                <span className={cx('new-price')}>999.000đ</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className={cx('grid-column-2-4')}>
-                        <div className={cx('product-item')}>
-                            <Button toDetail to={'/product'}>
-                                <div className={cx('product-img')}>
-                                    <img src={img.gigabyte} className={cx('img')} />
-                                </div>
-                            </Button>
-                            <h4 className={cx('product-title')}>GIGABYTE AORUS GeForce RTX 4090 MASTER 24G</h4>
-                            <div className={cx('product-price')}>
-                                <span className={cx('old-price')}>1.200.000đ</span>
-                                <span className={cx('new-price')}>999.000đ</span>
-                            </div>
-                        </div>
-                    </div>
+                    ))}
                 </div>
             </div>
 
-            <div className={cx('pagination')}>
+            {/* <div className={cx('pagination')}>
                 <ul className={cx('pagination-list')}>
                     <li className={cx('pagination-item')}>
                         <Button noBG>
@@ -139,7 +131,7 @@ function User_VGA() {
                         </Button>
                     </li>
                 </ul>
-            </div>
+            </div> */}
         </div>
     );
 }

@@ -65,11 +65,17 @@ function ProdUpdateForm(props) {
         if (!prodToUpdate.ProdName) {
             alert('Empty product name!!');
             return;
-            // } else if (prodToUpdate.ProdName.length > 250) {
-            //     alert('Name maximum 250!!');
-            //     return;
+        } else if (prodToUpdate.ProdName.length > 100) {
+            alert('Product name cannot exceed more than 100 characters!');
+            return;
         } else if (prodToUpdate.Price.length > 10 || prodToUpdate.Price.length < 7) {
-            alert('Number from 7 to 10 characters!!');
+            alert('Price from 7 to 10 characters!!');
+            return;
+        } else if (prodToUpdate.Categoryid === '') {
+            alert('Category name must be selected!!');
+            return;
+        } else if (prodToUpdate.Sid === '') {
+            alert('Supplier name must be selected!!');
             return;
         }
 
@@ -158,7 +164,7 @@ function ProdUpdateForm(props) {
                         className={cx('ip')}
                         value={formData.ImagePath}
                         name="ImagePath"
-                        type="text"
+                        type="file"
                         onChange={handleChange}
                     />
                 </div>

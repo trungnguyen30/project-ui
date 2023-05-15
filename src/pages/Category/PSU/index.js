@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react/headless';
 
 import classNames from 'classnames/bind';
-import styles from './CPU.module.scss';
+import styles from './PSU.module.scss';
 import Image from '~/components/Layout/components/Image';
 import Button from '~/components/Layout/components/Button';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
@@ -12,10 +12,10 @@ import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-function User_CPU() {
+function PSU() {
     const [prods, getProds] = useState([]);
     useEffect(() => {
-        const url = 'https://localhost:44397/api/Product/1';
+        const url = 'https://localhost:44397/api/Product/4';
         fetch(url, {
             method: 'GET',
         })
@@ -136,4 +136,4 @@ function User_CPU() {
     );
 }
 
-export default User_CPU;
+export default PSU;

@@ -47,19 +47,32 @@ function SupplierCreateForm(props) {
             PostalCode: formData.PostalCode,
         };
 
-        // if (!prodToCreate.ProdName) {
-        //     alert('Empty product name!!');
-        //     return;
-        // } else if (prodToCreate.ProdName.length > 50) {
-        //     alert('Name maximum 50!!');
-        //     return;
-        // } else if (prodToCreate.Price.length > 10 || prodToCreate.Price.length < 7) {
-        //     alert('Number from 7 to 10 characters!!');
-        //     return;
-        // } else if (prodToCreate.Categoryid === '') {
-        //     alert('Category Name must be selected!!');
-        //     return;
-        // }
+        const number = [0 - 9];
+        if (!supplierToCreate.ProducerId) {
+            alert('Empty producer name');
+            return;
+        }
+        if (!supplierToCreate.SName) {
+            alert('Empty name');
+            return;
+        } else if (!supplierToCreate.SName > 40) {
+            alert("Name cannot exceed more than 40 characters'");
+            return;
+        }
+        if (!supplierToCreate.Phone) {
+            alert('Empty phone');
+            return;
+        } else if (!number.test(supplierToCreate.Phone)) {
+            alert('Phone is number');
+            return;
+        }
+        if (!supplierToCreate.PostalCode) {
+            alert('Empty postal code');
+            return;
+        } else if (!number.test(supplierToCreate.PostalCode)) {
+            alert('Postal Code is number');
+            return;
+        }
 
         const url = 'https://localhost:44397/api/Supplier';
         fetch(url, {
@@ -87,7 +100,12 @@ function SupplierCreateForm(props) {
             <div className={cx('wrapper')}>
                 <div>
                     <label className={cx('lbl')}>Producer Name: </label>
-                    <select value={formData.ProducerId} name="ProducerId" onChange={handleChange} className={cx('selection')}>
+                    <select
+                        value={formData.ProducerId}
+                        name="ProducerId"
+                        onChange={handleChange}
+                        className={cx('selection')}
+                    >
                         <option value="" disabled>
                             -- Select --
                         </option>

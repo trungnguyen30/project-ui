@@ -13,10 +13,10 @@ const cx = classNames.bind(styles);
 
 function User() {
     const [prods, setProds] = useState([]);
-    const [carts, setCart] = useState([]);
+    const [carts, setCart] = useState(JSON.parse(localStorage.getItem('prod-added')) || []);
     const addToCart = (data) => {
         const prodExist = carts.find((item) => item.Pid === data.Pid);
-        const added = localStorage.setItem('prod-added', JSON.stringify(carts));
+        localStorage.setItem('prod-added', JSON.stringify(carts));
         if (prodExist) {
             setCart(
                 carts.map((item) =>
@@ -31,7 +31,7 @@ function User() {
         } else {
             setCart([...carts, { ...data, count: 1 }]);
         }
-        return added;
+        return carts;
     };
     // console.log(carts);
     useEffect(() => {
@@ -43,7 +43,7 @@ function User() {
             .then((result) => {
                 // console.log(result);
                 setProds(result);
-                localStorage.setItem('prods', JSON.stringify(result));
+                // localStorage.setItem('prods', JSON.stringify(result));
             })
             .catch((error) => {
                 console.log(error);

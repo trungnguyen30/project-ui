@@ -13,6 +13,10 @@ import Signup from '~/pages/Signup';
 import VGA from '~/pages/Category/VGA';
 import CPU from '~/pages/Category/CPU';
 import RAM from '~/pages/Category/RAM';
+import PSU from '~/pages/Category/PSU';
+import CASE from '~/pages/Category/CASE';
+import FAN from '~/pages/Category/FAN';
+import Guest_ShoppingCart from '~/pages/ShoppingCart';
 import Admin from '~/pages/Admin';
 import Ad_Category from '~/pages/Admin/Category';
 import Ad_Product from '~/pages/Admin/Product';
@@ -23,6 +27,9 @@ import User from '~/pages/User';
 import User_CPU from '~/pages/User/Category/CPU';
 import User_RAM from '~/pages/User/Category/RAM';
 import User_VGA from '~/pages/User/Category/VGA';
+import User_CASE from '~/pages/User/Category/CASE';
+import User_FAN from '~/pages/User/Category/FAN';
+import User_PSU from '~/pages/User/Category/PSU';
 import Staff from '~/pages/Staff';
 import Order from '~/pages/Staff/Order';
 import Receipt from '~/pages/Staff/Receipt';
@@ -37,6 +44,10 @@ const publicRoutes = [
     { path: '/VGA', component: VGA },
     { path: '/CPU', component: CPU },
     { path: '/RAM', component: RAM },
+    { path: '/CASE', component: CASE },
+    { path: '/PSU', component: PSU },
+    { path: '/FAN', component: FAN },
+    { path: '/guest-cart', component: Guest_ShoppingCart },
 ];
 
 const privateRoutes = [
@@ -50,6 +61,9 @@ const privateRoutes = [
     { path: '/user-CPU', component: User_CPU, layout: UserLayout },
     { path: '/user-RAM', component: User_RAM, layout: UserLayout },
     { path: '/user-VGA', component: User_VGA, layout: UserLayout },
+    { path: '/user-PSU', component: User_PSU, layout: UserLayout },
+    { path: '/user-CASE', component: User_CASE, layout: UserLayout },
+    { path: '/user-FAN', component: User_FAN, layout: UserLayout },
     { path: '/shopping-cart', component: ShoppingCart, layout: UserLayout },
     { path: '/staff', component: Staff, layout: StaffLayout },
     { path: '/order', component: Order, layout: StaffLayout },

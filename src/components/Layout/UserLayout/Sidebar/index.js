@@ -10,22 +10,6 @@ import { useState, useEffect } from 'react';
 const cx = classNames.bind(styles);
 
 function Sidebar() {
-    const [cates, setCates] = useState([]);
-    useEffect(() => {
-        const url = 'https://localhost:44397/api/Category';
-        fetch(url, {
-            method: 'GET',
-        })
-            .then((response) => response.json())
-            .then((result) => {
-                console.log(result);
-                setCates(result);
-            })
-            .catch((error) => {
-                console.log(error);
-                alert(error);
-            });
-    }, []);
     return (
         <nav className={cx('category')}>
             <Heading category>
@@ -39,24 +23,36 @@ function Sidebar() {
                         Home
                     </Button>
                 </li>
-                {cates.map((cate) => (
-                    <li className={cx('category-item')}>
-                        <Button toCate>
-                            {cate.CategoryName}
-                        </Button>
-                    </li>
-                ))}
-
-                {/* <li className={cx('category-item')}>
-                    <Button toCate to={'/CPU'}>
-                        CPU - Bộ vi xử lý
+                <li className={cx('category-item')}>
+                    <Button toCate to={'/user-CPU'}>
+                        CPU - bộ vi xử lý
                     </Button>
                 </li>
                 <li className={cx('category-item')}>
-                    <Button toCate to={'/RAM'}>
+                    <Button toCate to={'/user-RAM'}>
                         RAM - bộ nhớ trong
                     </Button>
-                </li> */}
+                </li>
+                <li className={cx('category-item')}>
+                    <Button toCate to={'/user-VGA'}>
+                        VGA - Card màn hình
+                    </Button>
+                </li>
+                <li className={cx('category-item')}>
+                    <Button toCate to={'/user-PSU'}>
+                        PSU - Nguồn máy tính
+                    </Button>
+                </li>
+                <li className={cx('category-item')}>
+                    <Button toCate to={'/user-CASE'}>
+                        CASE - Vỏ máy tính
+                    </Button>
+                </li>
+                <li className={cx('category-item')}>
+                    <Button toCate to={'/user-FAN'}>
+                        FAN RGB - Tản nhiệt
+                    </Button>
+                </li>
             </ul>
         </nav>
     );

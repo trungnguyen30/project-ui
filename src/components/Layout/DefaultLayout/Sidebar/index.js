@@ -4,27 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faList } from '@fortawesome/free-solid-svg-icons';
 import Heading from '../../components/Heading';
 import Button from '../../components/Button';
-import { useState, useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 
 function Sidebar() {
-    const [cates, setCates] = useState([]);
-    useEffect(() => {
-        const url = 'https://localhost:44397/api/Category';
-        fetch(url, {
-            method: 'GET',
-        })
-            .then((response) => response.json())
-            .then((result) => {
-                console.log(result);
-                setCates(result);
-            })
-            .catch((error) => {
-                console.log(error);
-                alert(error);
-            });
-    }, []);
     return (
         <nav className={cx('category')}>
             <Heading category>
@@ -39,11 +22,6 @@ function Sidebar() {
                     </Button>
                 </li>
                 <li className={cx('category-item')}>
-                    <Button toCate to={'/VGA'}>
-                        VGA - Card màn hình
-                    </Button>
-                </li>
-                <li className={cx('category-item')}>
                     <Button toCate to={'/CPU'}>
                         CPU - bộ vi xử lý
                     </Button>
@@ -51,6 +29,26 @@ function Sidebar() {
                 <li className={cx('category-item')}>
                     <Button toCate to={'/RAM'}>
                         RAM - bộ nhớ trong
+                    </Button>
+                </li>
+                <li className={cx('category-item')}>
+                    <Button toCate to={'/VGA'}>
+                        VGA - Card màn hình
+                    </Button>
+                </li>
+                <li className={cx('category-item')}>
+                    <Button toCate to={'/PSU'}>
+                        PSU - Nguồn máy tính
+                    </Button>
+                </li>
+                <li className={cx('category-item')}>
+                    <Button toCate to={'/CASE'}>
+                        CASE - Vỏ máy tính
+                    </Button>
+                </li>
+                <li className={cx('category-item')}>
+                    <Button toCate to={'/FAN'}>
+                        FAN RGB - Tản nhiệt
                     </Button>
                 </li>
             </ul>

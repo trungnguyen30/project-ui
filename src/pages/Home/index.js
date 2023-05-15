@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
 import styles from './Home.module.scss';
-import Image from '~/components/Layout/components/Image';
+import ProductList from '../ProductList';
 import Button from '~/components/Layout/components/Button';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import PriceItem from '~/components/Layout/components/PriceItem';
@@ -14,7 +14,26 @@ const cx = classNames.bind(styles);
 
 function Home() {
     const [prods, setProds] = useState([]);
-
+    const [carts, setCart] = useState(JSON.parse(localStorage.getItem('prod-added')) || []);
+    const addToCart = (data) => {
+        const prodExist = carts.find((item) => item.Pid === data.Pid);
+        localStorage.setItem('prod-added', JSON.stringify(carts));
+        if (prodExist) {
+            setCart(
+                carts.map((item) =>
+                    item.Pid === data.Pid
+                        ? {
+                              ...prodExist,
+                              count: prodExist.count + 1,
+                          }
+                        : item,
+                ),
+            );
+        } else {
+            setCart([...carts, { ...data, count: 1 }]);
+        }
+        return carts;
+    };
     useEffect(() => {
         const url = 'https://localhost:44397/api/Product';
         fetch(url, {
@@ -73,31 +92,7 @@ function Home() {
             </div>
 
             <div className={cx('product')}>
-                <div className={cx('grid-row')}>
-                    {prods.map((prod) => (
-                        <div className={cx('grid-column-2-4')} key={prod.Pid}>
-                            <div className={cx('product-item')}>
-                                <div className={cx('product-img')}>
-                                    <Image src={'assets/img/' + `${prod.ImagePath}`} className={cx('img')} />
-                                </div>
-                                <h4 className={cx('product-title')}>{prod.ProdName}</h4>
-                                <div className={cx('product-price')}>
-                                    <span className={cx('old-price')}>1.200.000đ</span>
-                                    <span className={cx('new-price')}>{prod.Price}đ</span>
-                                </div>
-                                <div className={cx('buttons')}>
-                                    <Button className={cx('btn')}>Details</Button>
-                                    <Button
-                                        className={cx('btn')}
-                                        // onClick={() => addToCart(prod)}
-                                    >
-                                        Add to cart
-                                    </Button>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                <ProductList prods={prods} addToCart={addToCart} />
             </div>
 
             <div className={cx('pagination')}>
